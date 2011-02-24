@@ -180,7 +180,7 @@ public class ActionBar extends LinearLayout {
              * An ActionBar must contain as few items as possible. So let's keep
              * a limit :)
              */
-            return;
+        	throw new RuntimeException("ActionBar may only contain " + MAX_ITEMS_COUNT + " items");
         }
 
         if (mDividerDrawable != null) {

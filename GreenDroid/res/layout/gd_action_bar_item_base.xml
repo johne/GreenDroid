@@ -21,4 +21,4 @@
 	style="?attr/gdActionBarItemStyle"
 	android:id="@+id/gd_action_bar_item"
 	android:layout_height="fill_parent"
-	android:scaleType="center" />
+	android:scaleType="centerInside" />
