@@ -15,56 +15,56 @@
  */
 package greendroid.app;
 
-import greendroid.widget.ActionBar;
-import greendroid.widget.ActionBarItem;
+import greendroid.widget.GDActionBar;
+import greendroid.widget.GDActionBarItem;
 import android.app.Activity;
 import android.app.Application;
 import android.widget.FrameLayout;
 
 /**
- * Defines all methods related to Activities embedding an {@link ActionBar}
+ * Defines all methods related to Activities embedding an {@link GDActionBar}
  * 
  * @author Cyril Mottier
  */
-public interface ActionBarActivity {
+public interface GDActionBarActivity {
 
     /**
-     * The key to use to set the title of the launched ActionBarActivity
+     * The key to use to set the title of the launched GDActionBarActivity
      */
-    static final String GD_ACTION_BAR_TITLE = "greendroid.app.ActionBarActivity.GD_ACTION_BAR_TITLE";
+    static final String GD_ACTION_BAR_TITLE = "greendroid.app.GDActionBarActivity.GD_ACTION_BAR_TITLE";
 
     /**
-     * Clients may use this method to listen to {@link ActionBarItem}s clicks.
+     * Clients may use this method to listen to {@link GDActionBarItem}s clicks.
      * 
-     * @param item The {@link ActionBarItem} that has been clicked
+     * @param item The {@link GDActionBarItem} that has been clicked
      * @param position The position of the clicked item. This number is equal or
      *            greater to zero. 0 is the leftmost item.
      * @return true if the method has handled the click on the
-     *         {@link ActionBarItem} at position <em>position</em>. Otherwise it
+     *         {@link GDActionBarItem} at position <em>position</em>. Otherwise it
      *         returns false.
      */
-    boolean onHandleActionBarItemClick(ActionBarItem item, int position);
+    boolean onHandleActionBarItemClick(GDActionBarItem item, int position);
 
     /**
      * Returns the content view. Please note the content view is not the entire
-     * view but a {@link FrameLayout} that contains everything but the {@link ActionBar}.
+     * view but a {@link FrameLayout} that contains everything but the {@link GDActionBar}.
      * 
      * @return The content view
      */
     FrameLayout getContentView();
 
     /**
-     * Returns the {@link ActionBar}. Listening to {@link ActionBar} events
+     * Returns the {@link GDActionBar}. Listening to {@link GDActionBar} events
      * should be done via the
-     * {@link ActionBarActivity#onHandleActionBarItemClick(ActionBarItem, int)}
+     * {@link GDActionBarActivity#onHandleActionBarItemClick(GDActionBarItem, int)}
      * method. Most of the time, this method don't need to be used directly.
      * 
-     * @see {@link ActionBarActivity#onHandleActionBarItemClick(ActionBarItem, int)}
-     * @see {@link ActionBarActivity#addActionBarItem(ActionBarItem)}
-     * @see {@link ActionBarActivity#addActionBarItem(greendroid.widget.ActionBarItem.Type)}
-     * @return The {@link ActionBar} currently displayed on screen
+     * @see {@link GDActionBarActivity#onHandleActionBarItemClick(GDActionBarItem, int)}
+     * @see {@link GDActionBarActivity#addActionBarItem(GDActionBarItem)}
+     * @see {@link GDActionBarActivity#addActionBarItem(greendroid.widget.GDActionBarItem.Type)}
+     * @return The {@link GDActionBar} currently displayed on screen
      */
-    ActionBar getActionBar();
+    GDActionBar getGDActionBar();
 
     /**
      * A simple utility method that casts the {@link Application} returned by
@@ -75,22 +75,22 @@ public interface ActionBarActivity {
     GDApplication getGDApplication();
 
     /**
-     * Add a new item to the {@link ActionBar}.
+     * Add a new item to the {@link GDActionBar}.
      * 
-     * @param item The item to add to the {@link ActionBar}
+     * @param item The item to add to the {@link GDActionBar}
      */
-    void addActionBarItem(ActionBarItem item);
+    void addActionBarItem(GDActionBarItem item);
 
     /**
-     * Adds a new item of type <em>type</em> to the {@link ActionBar}.
+     * Adds a new item of type <em>type</em> to the {@link GDActionBar}.
      * 
-     * @param actionBarItemType The item to add to the {@link ActionBar}
+     * @param actionBarItemType The item to add to the {@link GDActionBar}
      */
-    void addActionBarItem(ActionBarItem.Type actionBarItemType);
+    void addActionBarItem(GDActionBarItem.Type actionBarItemType);
 
     /**
      * Returns the identifier of the layout that needs to be created for this
-     * {@link ActionBarActivity}
+     * {@link GDActionBarActivity}
      * 
      * @return The layout identifier of the layout to create
      */

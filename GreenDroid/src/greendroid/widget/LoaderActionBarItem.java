@@ -62,7 +62,7 @@ public class LoaderActionBarItem extends NormalActionBarItem {
      * 
      * @param loading The new loading state. If true, an indeterminate
      *            {@link ProgressBar} is displayed. When false (default value)
-     *            the {@link ActionBarItem} behaves exactly like a regular
+     *            the {@link GDActionBarItem} behaves exactly like a regular
      *            {@link NormalActionBarItem}.
      */
     public void setLoading(boolean loading) {

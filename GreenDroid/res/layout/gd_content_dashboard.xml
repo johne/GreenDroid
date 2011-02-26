@@ -16,7 +16,7 @@
 ** limitations under the License.
 */
 -->
-<greendroid.widget.ActionBarHost
+<greendroid.widget.GDActionBarHost
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@id/gd_action_bar_host"
 	android:layout_width="fill_parent"
@@ -28,8 +28,8 @@
 		library projects ... I don't know why defining a greendroid namespace
 		does not work ... Should be greendroid:type="dashboard"
 	-->
-	<greendroid.widget.ActionBar
-		style="@style/GreenDroid.Widget.ActionBar.Dashboard"
+	<greendroid.widget.GDActionBar
+		style="@style/GreenDroid.Widget.GDActionBar.Dashboard"
 		android:id="@id/gd_action_bar"
 		android:layout_height="@dimen/gd_action_bar_height"
 		android:layout_width="fill_parent"
@@ -41,4 +41,4 @@
 		android:layout_width="fill_parent"
 		android:layout_weight="1" />
 
-</greendroid.widget.ActionBarHost>
+</greendroid.widget.GDActionBarHost>

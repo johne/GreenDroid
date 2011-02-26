@@ -16,10 +16,10 @@
 package greendroid.app;
 
 import greendroid.util.Config;
-import greendroid.widget.ActionBar;
-import greendroid.widget.ActionBar.OnActionBarListener;
-import greendroid.widget.ActionBarHost;
-import greendroid.widget.ActionBarItem;
+import greendroid.widget.GDActionBar;
+import greendroid.widget.GDActionBar.OnActionBarListener;
+import greendroid.widget.GDActionBarHost;
+import greendroid.widget.GDActionBarItem;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -34,15 +34,15 @@ import android.widget.TextView;
 import com.cyrilmottier.android.greendroid.R;
 
 /**
- * An equivalent to a TabActivity that manages fancy tabs and an ActionBar
+ * An equivalent to a TabActivity that manages fancy tabs and an GDActionBar
  * 
  * @author Cyril Mottier
  */
-public class GDTabActivity extends TabActivity implements ActionBarActivity {
+public class GDTabActivity extends TabActivity implements GDActionBarActivity {
 
     private static final String LOG_TAG = GDTabActivity.class.getSimpleName();
 
-    private ActionBarHost mActionBarHost;
+    private GDActionBarHost mActionBarHost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,10 +67,10 @@ public class GDTabActivity extends TabActivity implements ActionBarActivity {
     }
 
     public void onPreContentChanged() {
-        mActionBarHost = (ActionBarHost) findViewById(R.id.gd_action_bar_host);
+        mActionBarHost = (GDActionBarHost) findViewById(R.id.gd_action_bar_host);
         if (mActionBarHost == null) {
             throw new RuntimeException(
-                    "Your content must have an ActionBarHost whose id attribute is R.id.gd_action_bar_host");
+                    "Your content must have an GDActionBarHost whose id attribute is R.id.gd_action_bar_host");
         }
         mActionBarHost.getActionBar().setOnActionBarListener(mActionBarListener);
     }
@@ -81,7 +81,7 @@ public class GDTabActivity extends TabActivity implements ActionBarActivity {
 
         final Intent intent = getIntent();
         if (intent != null) {
-            String title = intent.getStringExtra(ActionBarActivity.GD_ACTION_BAR_TITLE);
+            String title = intent.getStringExtra(GDActionBarActivity.GD_ACTION_BAR_TITLE);
             if (title != null) {
                 titleSet = true;
                 setTitle(title);
@@ -109,7 +109,7 @@ public class GDTabActivity extends TabActivity implements ActionBarActivity {
 
     @Override
     public void setTitle(CharSequence title) {
-        getActionBar().setTitle(title);
+        getGDActionBar().setTitle(title);
     }
 
     @Override
@@ -117,23 +117,23 @@ public class GDTabActivity extends TabActivity implements ActionBarActivity {
         setTitle(getString(titleId));
     }
 
-    public ActionBar getActionBar() {
+    public GDActionBar getGDActionBar() {
         return mActionBarHost.getActionBar();
     }
 
-    public void addActionBarItem(ActionBarItem item) {
-        getActionBar().addItem(item);
+    public void addActionBarItem(GDActionBarItem item) {
+        getGDActionBar().addItem(item);
     }
 
-    public void addActionBarItem(ActionBarItem.Type actionBarItemType) {
-        getActionBar().addItem(actionBarItemType);
+    public void addActionBarItem(GDActionBarItem.Type actionBarItemType) {
+        getGDActionBar().addItem(actionBarItemType);
     }
 
     public FrameLayout getContentView() {
         return mActionBarHost.getContentView();
     }
 
-    public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
+    public boolean onHandleActionBarItemClick(GDActionBarItem item, int position) {
         return false;
     }
 
@@ -152,7 +152,7 @@ public class GDTabActivity extends TabActivity implements ActionBarActivity {
                 }
 
             } else {
-                if (!onHandleActionBarItemClick(getActionBar().getItem(position), position)) {
+                if (!onHandleActionBarItemClick(getGDActionBar().getItem(position), position)) {
                     if (Config.GD_WARNING_LOGS_ENABLED) {
                         Log.w(LOG_TAG, "Click on item at position " + position + " dropped down to the floor");
                     }

@@ -82,9 +82,9 @@
 		<item name="gdActionBarApplicationDrawable">@null</item>
 		<item name="gdActionBarHomeDrawable">@drawable/gd_action_bar_home</item>
 		
-		<item name="gdActionBarStyle">@style/GreenDroid.Widget.ActionBar</item>
-		<item name="gdActionBarTitleStyle">@style/GreenDroid.Widget.ActionBar.Title</item>
-		<item name="gdActionBarItemStyle">@style/GreenDroid.Widget.ActionBar.Item</item>
+		<item name="gdActionBarStyle">@style/GreenDroid.Widget.GDActionBar</item>
+		<item name="gdActionBarTitleStyle">@style/GreenDroid.Widget.GDActionBar.Title</item>
+		<item name="gdActionBarItemStyle">@style/GreenDroid.Widget.GDActionBar.Item</item>
 		
 		<item name="gdTabIndicatorHeight">38dp</item>
         <item name="gdTabIndicatorTextAppearance">@style/TextAppearance.TabIndicator</item>
