@@ -15,7 +15,7 @@
  */
 package greendroid.widget;
 
-import greendroid.util.Config;
+import greendroid.graphics.drawable.ActionBarDrawable;
 
 import java.util.LinkedList;
 
@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
@@ -33,19 +32,18 @@ import android.widget.TextView;
 
 import com.cyrilmottier.android.greendroid.R;
 
-public class GDActionBar extends LinearLayout {
+public class ActionBar extends LinearLayout {
 
-    private static final String LOG_TAG = GDActionBar.class.getSimpleName();
-
-    private static int MAX_ITEMS_COUNT = 3;
+    public static final int NONE = 0;
+    private static final int MAX_ITEMS_COUNT = 3;
 
     public enum Type {
-        Normal, Dashboard
+        Normal, Dashboard, Empty
     }
-    
+
     public interface OnActionBarListener {
 
-        static final int HOME_ITEM = -1;
+        int HOME_ITEM = -1;
 
         /**
          * Clients may listen to this method in order to be notified the user
@@ -65,23 +63,23 @@ public class GDActionBar extends LinearLayout {
     private boolean mMerging = false;
 
     private String mTitle;
-    private GDActionBar.Type mType;
+    private ActionBar.Type mType;
     private OnActionBarListener mOnActionBarListener;
-    private LinkedList<GDActionBarItem> mItems;
+    private LinkedList<ActionBarItem> mItems;
 
     private Drawable mDividerDrawable;
     private Drawable mHomeDrawable;
     private int mDividerWidth;
 
-    public GDActionBar(Context context) {
+    public ActionBar(Context context) {
         this(context, null);
     }
 
-    public GDActionBar(Context context, AttributeSet attrs) {
+    public ActionBar(Context context, AttributeSet attrs) {
         this(context, attrs, R.attr.gdActionBarStyle);
     }
 
-    public GDActionBar(Context context, AttributeSet attrs, int defStyle) {
+    public ActionBar(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs);
 
         initActionBar();
@@ -93,10 +91,17 @@ public class GDActionBar extends LinearLayout {
         mDividerDrawable = a.getDrawable(R.styleable.ActionBar_dividerDrawable);
         mDividerWidth = a.getDimensionPixelSize(R.styleable.ActionBar_dividerWidth, -1);
         mHomeDrawable = a.getDrawable(R.styleable.ActionBar_homeDrawable);
+        if (mHomeDrawable == null) {
+            mHomeDrawable = new ActionBarDrawable(getResources(), R.drawable.gd_action_bar_home);
+        }
 
         int layoutID;
         int type = a.getInteger(R.styleable.ActionBar_type, -1);
         switch (type) {
+            case 2:
+                mType = Type.Empty;
+                layoutID = R.layout.gd_action_bar_empty;
+                break;
             case 1:
                 mType = Type.Dashboard;
                 layoutID = R.layout.gd_action_bar_dashboard;
@@ -121,7 +126,7 @@ public class GDActionBar extends LinearLayout {
     }
 
     private void initActionBar() {
-        mItems = new LinkedList<GDActionBarItem>();
+        mItems = new LinkedList<ActionBarItem>();
     }
 
     @Override
@@ -130,29 +135,33 @@ public class GDActionBar extends LinearLayout {
 
         if (!mMerging) {
 
-            if (Config.GD_INFO_LOGS_ENABLED) {
-                Log.i(LOG_TAG, "onFinishInflate() - not merging");
-            }
-
-            // Work done for both Dashboard and Normal type
-            mHomeButton = (ImageButton) findViewById(R.id.gd_action_bar_home_item);
-            mHomeButton.setOnClickListener(mClickHandler);
-
             switch (mType) {
+                case Dashboard:
+                    mHomeButton = (ImageButton) findViewById(R.id.gd_action_bar_home_item);
+                    mHomeButton.setOnClickListener(mClickHandler);
+                    break;
+
+                case Empty:
+                    mTitleView = (TextView) findViewById(R.id.gd_action_bar_title);
+                    if (mTitle != null) {
+                        setTitle(mTitle);
+                    }
+                    break;
+
                 case Normal:
+                default:
+                    mHomeButton = (ImageButton) findViewById(R.id.gd_action_bar_home_item);
+                    mHomeButton.setOnClickListener(mClickHandler);
                     mHomeButton.setImageDrawable(mHomeDrawable);
                     mHomeButton.setContentDescription(getContext().getString(R.string.gd_go_home));
                     mTitleView = (TextView) findViewById(R.id.gd_action_bar_title);
                     if (mTitle != null) {
                         setTitle(mTitle);
                     }
-                    
-                default:
-                    //Do nothing
                     break;
+
             }
         }
-
     }
 
     public void setOnActionBarListener(OnActionBarListener listener) {
@@ -165,47 +174,62 @@ public class GDActionBar extends LinearLayout {
         }
     }
 
-    public void setMaxItemsCount(int maxItemsCount) {
-        MAX_ITEMS_COUNT = maxItemsCount;
+    public ActionBarItem addItem(ActionBarItem.Type actionBarItemType) {
+        return addItem(ActionBarItem.createWithType(this, actionBarItemType), NONE);
     }
 
-    public void addItem(GDActionBarItem.Type actionBarItemType) {
-        addItem(GDActionBarItem.createWithType(this, actionBarItemType));
+    public ActionBarItem addItem(ActionBarItem.Type actionBarItemType, int itemId) {
+        return addItem(ActionBarItem.createWithType(this, actionBarItemType), itemId);
     }
 
-    public void addItem(GDActionBarItem item) {
+    public ActionBarItem addItem(ActionBarItem item) {
+        return addItem(item, NONE);
+    }
+
+    public ActionBarItem addItem(ActionBarItem item, int itemId) {
 
         if (mItems.size() >= MAX_ITEMS_COUNT) {
             /*
-             * An GDActionBar must contain as few items as possible. So let's keep
+             * An ActionBar must contain as few items as possible. So let's keep
              * a limit :)
              */
-        	throw new RuntimeException("GDActionBar may only contain " + MAX_ITEMS_COUNT + " items");
+            return null;
         }
 
-        if (mDividerDrawable != null) {
-            ImageView divider = new ImageView(getContext());
-            int dividerWidth = (mDividerWidth > 0) ? mDividerWidth : mDividerDrawable.getIntrinsicWidth();
-            final LinearLayout.LayoutParams lp = new LayoutParams(dividerWidth, LayoutParams.FILL_PARENT);
-            divider.setLayoutParams(lp);
-            divider.setBackgroundDrawable(mDividerDrawable);
-            addView(divider);
+        if (item != null) {
+
+            item.setItemId(itemId);
+
+            if (mDividerDrawable != null) {
+                ImageView divider = new ImageView(getContext());
+                int dividerWidth = (mDividerWidth > 0) ? mDividerWidth : mDividerDrawable.getIntrinsicWidth();
+                final LinearLayout.LayoutParams lp = new LayoutParams(dividerWidth, LayoutParams.FILL_PARENT);
+                divider.setLayoutParams(lp);
+                divider.setBackgroundDrawable(mDividerDrawable);
+                addView(divider);
+            }
+
+            final View itemView = item.getItemView();
+            itemView.findViewById(R.id.gd_action_bar_item).setOnClickListener(mClickHandler);
+
+            final int size = (int) getResources().getDimension(R.dimen.gd_action_bar_height);
+            addView(itemView, new LayoutParams(size, LayoutParams.FILL_PARENT));
+
+            mItems.add(item);
         }
 
-        final View itemView = item.getItemView();
-        itemView.findViewById(R.id.gd_action_bar_item).setOnClickListener(mClickHandler);
-
-        final int size = (int) getResources().getDimension(R.dimen.gd_action_bar_height);
-        addView(itemView, new LayoutParams(size, LayoutParams.FILL_PARENT));
-
-        mItems.add(item);
+        return item;
     }
 
-    public GDActionBarItem getItem(int position) {
+    public ActionBarItem getItem(int position) {
         if (position < 0 || position >= mItems.size()) {
             return null;
         }
         return mItems.get(position);
+    }
+
+    public void removeItem(ActionBarItem item) {
+        removeItem(mItems.indexOf(item));
     }
 
     public void removeItem(int position) {
@@ -230,6 +254,9 @@ public class GDActionBar extends LinearLayout {
 
             int layoutId = 0;
             switch (type) {
+                case Empty:
+                    layoutId = R.layout.gd_action_bar_empty;
+                    break;
                 case Dashboard:
                     layoutId = R.layout.gd_action_bar_dashboard;
                     break;
@@ -243,24 +270,24 @@ public class GDActionBar extends LinearLayout {
             mMerging = false;
 
             // Reset all items
-            LinkedList<GDActionBarItem> itemsCopy = new LinkedList<GDActionBarItem>(mItems);
+            LinkedList<ActionBarItem> itemsCopy = new LinkedList<ActionBarItem>(mItems);
             mItems.clear();
-            for (GDActionBarItem item : itemsCopy) {
+            for (ActionBarItem item : itemsCopy) {
                 addItem(item);
             }
         }
     }
 
-    public GDActionBarItem newActionBarItem(Class<? extends GDActionBarItem> klass) {
+    public ActionBarItem newActionBarItem(Class<? extends ActionBarItem> klass) {
         try {
-            GDActionBarItem item = klass.newInstance();
+            ActionBarItem item = klass.newInstance();
             item.setActionBar(this);
             return item;
         } catch (Exception e) {
             throw new IllegalArgumentException("The given klass must have a default constructor");
         }
     }
-    
+
     private OnClickListener mClickHandler = new OnClickListener() {
 
         public void onClick(View v) {
@@ -273,7 +300,7 @@ public class GDActionBar extends LinearLayout {
 
                 final int itemCount = mItems.size();
                 for (int i = 0; i < itemCount; i++) {
-                    final GDActionBarItem item = mItems.get(i);
+                    final ActionBarItem item = mItems.get(i);
                     final View itemButton = item.getItemView().findViewById(R.id.gd_action_bar_item);
                     if (v == itemButton) {
                         item.onItemClicked();
