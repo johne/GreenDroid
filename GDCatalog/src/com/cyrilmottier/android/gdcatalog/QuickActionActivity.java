@@ -16,8 +16,8 @@
 package com.cyrilmottier.android.gdcatalog;
 
 import greendroid.app.GDActivity;
-import greendroid.widget.ActionBarItem;
-import greendroid.widget.ActionBarItem.Type;
+import greendroid.widget.GDActionBarItem;
+import greendroid.widget.GDActionBarItem.Type;
 import greendroid.widget.QuickAction;
 import greendroid.widget.QuickActionBar;
 import greendroid.widget.QuickActionGrid;
@@ -41,7 +41,7 @@ public class QuickActionActivity extends GDActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setActionBarContentView(R.layout.quick_action);
+        setGDActionBarContentView(R.layout.quick_action);
 
         prepareQuickActionBar();
         prepareQuickActionGrid();
@@ -58,7 +58,7 @@ public class QuickActionActivity extends GDActivity {
     }
 
     @Override
-    public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
+    public boolean onHandleActionBarItemClick(GDActionBarItem item, int position) {
 
         switch (position) {
             case 0:

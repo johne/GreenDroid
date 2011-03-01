@@ -30,7 +30,7 @@ public class WebContentActivity extends GDActivity {
 
         final String contentUrl = getIntent().getStringExtra(EXTRA_CONTENT_URL);
         if (!TextUtils.isEmpty(contentUrl)) {
-            setActionBarContentView(R.layout.web_view);
+            setGDActionBarContentView(R.layout.web_view);
             final WebView webView = (WebView) findViewById(R.id.web_view);
                 webView.loadUrl(contentUrl);
 

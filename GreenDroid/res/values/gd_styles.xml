@@ -145,8 +145,8 @@
     </style>
 
 
-	<!-- ActionBar related styles -->
-    <style name="GreenDroid.Widget.ActionBar">
+	<!-- GDActionBar related styles -->
+    <style name="GreenDroid.Widget.GDActionBar">
         <item name="android:background">?attr/gdActionBarBackground</item>
         <item name="android:layout_height">@dimen/gd_action_bar_height</item>
         <item name="android:layout_width">fill_parent</item>
@@ -155,20 +155,20 @@
         <item name="homeDrawable">?attr/gdActionBarHomeDrawable</item>
     </style>
     
-    <style name="GreenDroid.Widget.ActionBar.Dashboard">
+    <style name="GreenDroid.Widget.GDActionBar.Dashboard">
     	<item name="type">dashboard</item>
     </style>
     
-    <style name="GreenDroid.Widget.ActionBar.Empty">
+    <style name="GreenDroid.Widget.GDActionBar.Empty">
     	<item name="type">empty</item>
     </style>
     
-    <style name="GreenDroid.Widget.ActionBar.Item">
+    <style name="GreenDroid.Widget.GDActionBar.Item">
     	<item name="android:layout_width">@dimen/gd_action_bar_height</item>
         <item name="android:background">?attr/gdActionBarItemBackground</item>
     </style>
     
-    <style name="GreenDroid.Widget.ActionBar.Title">
+    <style name="GreenDroid.Widget.GDActionBar.Title">
         <item name="android:textColor">?attr/gdActionBarTitleColor</item>
     </style>
     

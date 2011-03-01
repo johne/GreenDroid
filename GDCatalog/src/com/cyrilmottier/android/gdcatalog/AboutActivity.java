@@ -26,7 +26,7 @@ public class AboutActivity extends GDActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setActionBarContentView(R.layout.about);
+        setGDActionBarContentView(R.layout.about);
         
         final TextView aboutText = (TextView) findViewById(R.id.about);
         aboutText.setMovementMethod(LinkMovementMethod.getInstance());

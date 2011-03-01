@@ -51,7 +51,7 @@ public class GDActionBarHost extends LinearLayout {
         }
     }
 
-    public GDActionBar getActionBar() {
+    public GDActionBar getGDActionBar() {
         return mActionBar;
     }
 

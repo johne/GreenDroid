@@ -33,7 +33,7 @@ public class SegmentedActivity extends GDActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setActionBarContentView(R.layout.segmented_controls);
+        setGDActionBarContentView(R.layout.segmented_controls);
 
         SegmentedHost segmentedHost = (SegmentedHost) findViewById(R.id.segmented_host);
 

@@ -17,7 +17,7 @@
 */
 -->
 
-<greendroid.widget.ActionBarHost
+<greendroid.widget.GDActionBarHost
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@id/gd_action_bar_host"
 	android:layout_width="fill_parent"
@@ -26,11 +26,11 @@
 
 	<!--
 		Layout height/width and background are set here. This is a hack to
-		apply a default style to the ActionBar. Indeed, no style can be
+		apply a default style to the GDActionBar. Indeed, no style can be
 		applied to a LinearLayout
 	-->
-	<greendroid.widget.ActionBar
-		style="@style/GreenDroid.Widget.ActionBar.Dashboard"
+	<greendroid.widget.GDActionBar
+		style="@style/GreenDroid.Widget.GDActionBar.Dashboard"
 		android:id="@id/gd_action_bar"
         android:layout_height="@dimen/gd_action_bar_height"
         android:layout_width="fill_parent"
@@ -49,4 +49,4 @@
 
 	</FrameLayout>
 
-</greendroid.widget.ActionBarHost>
+</greendroid.widget.GDActionBarHost>

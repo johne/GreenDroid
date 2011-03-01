@@ -76,7 +76,7 @@
     <attr name="gdSegmentedHostStyle" format="reference" />
     
     
-    <!-- ActionBar related attributes -->
+    <!-- GDActionBar related attributes -->
     <attr name="gdActionBarTitleColor" format="color" />
     <attr name="gdActionBarBackground" format="reference" />
     <attr name="gdActionBarItemBackground" format="reference" />
@@ -151,8 +151,8 @@
 	</declare-styleable>
     
     
-    <!-- ActionBar related attributes -->
-    <declare-styleable name="ActionBar">
+    <!-- GDActionBar related attributes -->
+    <declare-styleable name="GDActionBar">
         <attr name="title" format="string" />
         <attr name="type">
             <enum name="normal" value="0" />

@@ -16,10 +16,10 @@
 package greendroid.app;
 
 import greendroid.util.Config;
-import greendroid.widget.ActionBar;
-import greendroid.widget.ActionBar.OnActionBarListener;
-import greendroid.widget.ActionBarHost;
-import greendroid.widget.ActionBarItem;
+import greendroid.widget.GDActionBar;
+import greendroid.widget.GDActionBar.OnActionBarListener;
+import greendroid.widget.GDActionBarHost;
+import greendroid.widget.GDActionBarItem;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -34,7 +34,7 @@ import android.widget.TextView;
 import com.cyrilmottier.android.greendroid.R;
 
 /**
- * An equivalent to a TabActivity that manages fancy tabs and an ActionBar
+ * An equivalent to a TabActivity that manages fancy tabs andGDActionBarionBar
  * 
  * @author Cyril Mottier
  */
@@ -42,7 +42,7 @@ public class GDTabActivity extends TabActivity implements ActionBarActivity {
 
     private static final String LOG_TAG = GDTabActivity.class.getSimpleName();
 
-    private ActionBarHost mActionBarHost;
+    private GDActionBarHost mActionBarHost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +67,12 @@ public class GDTabActivity extends TabActivity implements ActionBarActivity {
     }
 
     public void onPreContentChanged() {
-        mActionBarHost = (ActionBarHost) findViewById(R.id.gd_action_bar_host);
+        mActionBarHost = (GDActionBarHost) findViewById(R.id.gd_action_bar_host);
         if (mActionBarHost == null) {
             throw new RuntimeException(
-                    "Your content must have an ActionBarHost whose id attribute is R.id.gd_action_bar_host");
+                    "Your content must have an GDActionBarHost whose id attribute is R.id.gd_action_bar_host");
         }
-        mActionBarHost.getActionBar().setOnActionBarListener(mActionBarListener);
+        mActionBarHost.getGDActionBar().setOnActionBarListener(mActionBarListener);
     }
 
     public void onPostContentChanged() {
@@ -102,7 +102,7 @@ public class GDTabActivity extends TabActivity implements ActionBarActivity {
         }
         
         final int visibility = intent.getIntExtra(ActionBarActivity.GD_ACTION_BAR_VISIBILITY, View.VISIBLE);
-        getActionBar().setVisibility(visibility);
+        getGDActionBar().setVisibility(visibility);
     }
 
     // @Override
@@ -112,7 +112,7 @@ public class GDTabActivity extends TabActivity implements ActionBarActivity {
 
     @Override
     public void setTitle(CharSequence title) {
-        getActionBar().setTitle(title);
+        getGDActionBar().setTitle(title);
     }
 
     @Override
@@ -120,31 +120,31 @@ public class GDTabActivity extends TabActivity implements ActionBarActivity {
         setTitle(getString(titleId));
     }
 
-    public ActionBar getActionBar() {
-        return mActionBarHost.getActionBar();
+    public GDActionBar getGDActionBar() {
+        return mActionBarHost.getGDActionBar();
     }
 
-    public ActionBarItem addActionBarItem(ActionBarItem item) {
-        return getActionBar().addItem(item);
+    public GDActionBarItem addActionBarItem(GDActionBarItem item) {
+        return getGDActionBar().addItem(item);
     }
     
-    public ActionBarItem addActionBarItem(ActionBarItem item, int itemId) {
-        return getActionBar().addItem(item, itemId);
+    public GDActionBarItem addActionBarItem(GDActionBarItem item, int itemId) {
+        return getGDActionBar().addItem(item, itemId);
     }
 
-    public ActionBarItem addActionBarItem(ActionBarItem.Type actionBarItemType) {
-        return getActionBar().addItem(actionBarItemType);
+    public GDActionBarItem addActionBarItem(GDActionBarItem.Type actionBarItemType) {
+        return getGDActionBar().addItem(actionBarItemType);
     }
     
-    public ActionBarItem addActionBarItem(ActionBarItem.Type actionBarItemType, int itemId) {
-        return getActionBar().addItem(actionBarItemType, itemId);
+    public GDActionBarItem addActionBarItem(GDActionBarItem.Type actionBarItemType, int itemId) {
+        return getGDActionBar().addItem(actionBarItemType, itemId);
     }
 
     public FrameLayout getContentView() {
         return mActionBarHost.getContentView();
     }
 
-    public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
+    public boolean onHandleActionBarItemClick(GDActionBarItem item, int position) {
         return false;
     }
 
@@ -163,7 +163,7 @@ public class GDTabActivity extends TabActivity implements ActionBarActivity {
                 }
 
             } else {
-                if (!onHandleActionBarItemClick(getActionBar().getItem(position), position)) {
+                if (!onHandleActionBarItemClick(getGDActionBar().getItem(position), position)) {
                     if (Config.GD_WARNING_LOGS_ENABLED) {
                         Log.w(LOG_TAG, "Click on item at position " + position + " dropped down to the floor");
                     }

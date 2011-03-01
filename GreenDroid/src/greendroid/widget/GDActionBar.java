@@ -32,7 +32,7 @@ import android.widget.TextView;
 
 import com.cyrilmottier.android.greendroid.R;
 
-public class ActionBar extends LinearLayout {
+public class GDActionBar extends LinearLayout {
 
     public static final int NONE = 0;
     private static final int MAX_ITEMS_COUNT = 3;
@@ -63,40 +63,40 @@ public class ActionBar extends LinearLayout {
     private boolean mMerging = false;
 
     private String mTitle;
-    private ActionBar.Type mType;
+    private GDActionBar.Type mType;
     private OnActionBarListener mOnActionBarListener;
-    private LinkedList<ActionBarItem> mItems;
+    private LinkedList<GDActionBarItem> mItems;
 
     private Drawable mDividerDrawable;
     private Drawable mHomeDrawable;
     private int mDividerWidth;
 
-    public ActionBar(Context context) {
+    public GDActionBar(Context context) {
         this(context, null);
     }
 
-    public ActionBar(Context context, AttributeSet attrs) {
+    public GDActionBar(Context context, AttributeSet attrs) {
         this(context, attrs, R.attr.gdActionBarStyle);
     }
 
-    public ActionBar(Context context, AttributeSet attrs, int defStyle) {
+    public GDActionBar(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs);
 
         initActionBar();
 
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ActionBar, defStyle, 0);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.GDActionBar, defStyle, 0);
 
-        mTitle = a.getString(R.styleable.ActionBar_title);
+        mTitle = a.getString(R.styleable.GDActionBar_title);
 
-        mDividerDrawable = a.getDrawable(R.styleable.ActionBar_dividerDrawable);
-        mDividerWidth = a.getDimensionPixelSize(R.styleable.ActionBar_dividerWidth, -1);
-        mHomeDrawable = a.getDrawable(R.styleable.ActionBar_homeDrawable);
+        mDividerDrawable = a.getDrawable(R.styleable.GDActionBar_dividerDrawable);
+        mDividerWidth = a.getDimensionPixelSize(R.styleable.GDActionBar_dividerWidth, -1);
+        mHomeDrawable = a.getDrawable(R.styleable.GDActionBar_homeDrawable);
         if (mHomeDrawable == null) {
             mHomeDrawable = new ActionBarDrawable(getResources(), R.drawable.gd_action_bar_home);
         }
 
         int layoutID;
-        int type = a.getInteger(R.styleable.ActionBar_type, -1);
+        int type = a.getInteger(R.styleable.GDActionBar_type, -1);
         switch (type) {
             case 2:
                 mType = Type.Empty;
@@ -126,7 +126,7 @@ public class ActionBar extends LinearLayout {
     }
 
     private void initActionBar() {
-        mItems = new LinkedList<ActionBarItem>();
+        mItems = new LinkedList<GDActionBarItem>();
     }
 
     @Override
@@ -174,23 +174,23 @@ public class ActionBar extends LinearLayout {
         }
     }
 
-    public ActionBarItem addItem(ActionBarItem.Type actionBarItemType) {
-        return addItem(ActionBarItem.createWithType(this, actionBarItemType), NONE);
+    public GDActionBarItem addItem(GDActionBarItem.Type actionBarItemType) {
+        return addItem(GDActionBarItem.createWithType(this, actionBarItemType), NONE);
     }
 
-    public ActionBarItem addItem(ActionBarItem.Type actionBarItemType, int itemId) {
-        return addItem(ActionBarItem.createWithType(this, actionBarItemType), itemId);
+    public GDActionBarItem addItem(GDActionBarItem.Type actionBarItemType, int itemId) {
+        return addItem(GDActionBarItem.createWithType(this, actionBarItemType), itemId);
     }
 
-    public ActionBarItem addItem(ActionBarItem item) {
+    public GDActionBarItem addItem(GDActionBarItem item) {
         return addItem(item, NONE);
     }
 
-    public ActionBarItem addItem(ActionBarItem item, int itemId) {
+    public GDActionBarItem addItem(GDActionBarItem item, int itemId) {
 
         if (mItems.size() >= MAX_ITEMS_COUNT) {
             /*
-             * An ActionBar must contain as few items as possible. So let's keep
+             * An GDActionBar must contain as few items as possible. So let's keep
              * a limit :)
              */
             return null;
@@ -221,14 +221,14 @@ public class ActionBar extends LinearLayout {
         return item;
     }
 
-    public ActionBarItem getItem(int position) {
+    public GDActionBarItem getItem(int position) {
         if (position < 0 || position >= mItems.size()) {
             return null;
         }
         return mItems.get(position);
     }
 
-    public void removeItem(ActionBarItem item) {
+    public void removeItem(GDActionBarItem item) {
         removeItem(mItems.indexOf(item));
     }
 
@@ -270,17 +270,17 @@ public class ActionBar extends LinearLayout {
             mMerging = false;
 
             // Reset all items
-            LinkedList<ActionBarItem> itemsCopy = new LinkedList<ActionBarItem>(mItems);
+            LinkedList<GDActionBarItem> itemsCopy = new LinkedList<GDActionBarItem>(mItems);
             mItems.clear();
-            for (ActionBarItem item : itemsCopy) {
+            for (GDActionBarItem item : itemsCopy) {
                 addItem(item);
             }
         }
     }
 
-    public ActionBarItem newActionBarItem(Class<? extends ActionBarItem> klass) {
+    public GDActionBarItem newActionBarItem(Class<? extends GDActionBarItem> klass) {
         try {
-            ActionBarItem item = klass.newInstance();
+            GDActionBarItem item = klass.newInstance();
             item.setActionBar(this);
             return item;
         } catch (Exception e) {
@@ -300,7 +300,7 @@ public class ActionBar extends LinearLayout {
 
                 final int itemCount = mItems.size();
                 for (int i = 0; i < itemCount; i++) {
-                    final ActionBarItem item = mItems.get(i);
+                    final GDActionBarItem item = mItems.get(i);
                     final View itemButton = item.getItemView().findViewById(R.id.gd_action_bar_item);
                     if (v == itemButton) {
                         item.onItemClicked();

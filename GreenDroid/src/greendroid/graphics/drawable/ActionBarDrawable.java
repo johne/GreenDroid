@@ -15,7 +15,7 @@
  */
 package greendroid.graphics.drawable;
 
-import greendroid.widget.ActionBar;
+import greendroid.widget.GDActionBarItem;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -26,11 +26,11 @@ import android.graphics.drawable.StateListDrawable;
 import android.util.StateSet;
 
 /**
- * A specialized {@link Drawable} that is dedicated to {@link ActionBarItem}s.
+ * A specialized {@link Drawable} that is dedicated to {@link GDActionBarItem}s.
  * It automatically adapts its color depending on its current state (black when
  * pressed or focused and white otherwise). As a result, the
  * {@link AutoColorDrawable} is a replacement {@link StateListDrawable} that
- * should be used in {@link ActionBar}s.
+ * should be used in {@linGDActionBarnBar}s.
  * 
  * @author Cyril Mottier
  */

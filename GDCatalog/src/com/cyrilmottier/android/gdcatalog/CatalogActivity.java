@@ -17,7 +17,7 @@ package com.cyrilmottier.android.gdcatalog;
 
 import greendroid.app.GDListActivity;
 import greendroid.graphics.drawable.ActionBarDrawable;
-import greendroid.widget.ActionBarItem;
+import greendroid.widget.GDActionBarItem;
 import greendroid.widget.ItemAdapter;
 import greendroid.widget.NormalActionBarItem;
 import greendroid.widget.item.TextItem;
@@ -44,7 +44,7 @@ public class CatalogActivity extends GDListActivity {
 
         setListAdapter(adapter);
 
-        addActionBarItem(getActionBar()
+        addActionBarItem(getGDActionBar()
                 .newActionBarItem(NormalActionBarItem.class)
                 .setDrawable(new ActionBarDrawable(getResources(), R.drawable.ic_action_bar_info)), R.id.action_bar_view_info);
     }
@@ -64,7 +64,7 @@ public class CatalogActivity extends GDListActivity {
     }
 
     @Override
-    public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
+    public boolean onHandleActionBarItemClick(GDActionBarItem item, int position) {
         switch (item.getItemId()) {
             case R.id.action_bar_view_info:
                 startActivity(new Intent(this, InfoTabActivity.class));

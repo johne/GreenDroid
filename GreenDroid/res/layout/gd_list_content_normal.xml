@@ -26,7 +26,7 @@
 
 	<!--
 		Layout height/width and background are set here. This is a hack to
-		apply a default style to the ActionBar. Indeed, no style can be
+		apply a default style to the GDActionBar. Indeed, no style can be
 		applied to a LinearLayout
 	-->
 	<greendroid.widget.GDActionBar

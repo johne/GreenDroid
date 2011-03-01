@@ -16,9 +16,9 @@
 package com.cyrilmottier.android.gdcatalog;
 
 import greendroid.app.GDActivity;
-import greendroid.widget.ActionBarItem;
+import greendroid.widget.GDActionBarItem;
+import greendroid.widget.GDActionBarItem.Type;
 import greendroid.widget.LoaderActionBarItem;
-import greendroid.widget.ActionBarItem.Type;
 import greendroid.widget.NormalActionBarItem;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,11 +34,11 @@ public class ActionBarActivity extends GDActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setActionBarContentView(R.layout.text);
+        setGDActionBarContentView(R.layout.text);
         ((TextView) findViewById(R.id.text)).setText(R.string.first_screen);
 
         addActionBarItem(Type.Refresh, R.id.action_bar_refresh);
-        addActionBarItem(getActionBar()
+        addActionBarItem(getGDActionBar()
                 .newActionBarItem(NormalActionBarItem.class)
                 .setDrawable(R.drawable.ic_title_export)
                 .setContentDescription(R.string.gd_export), R.id.action_bar_export);
@@ -46,7 +46,7 @@ public class ActionBarActivity extends GDActivity {
     }
 
     @Override
-    public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
+    public boolean onHandleActionBarItemClick(GDActionBarItem item, int position) {
 
         switch (item.getItemId()) {
             case R.id.action_bar_locate:

@@ -23,13 +23,13 @@ import android.view.View;
 import com.cyrilmottier.android.greendroid.R;
 
 /**
- * Base class representing an {@link ActionBarItem} used in {@link ActionBar}s.
+ * Base class representing an {@link GDActionBarItem} used in {@link GDActionBar}s.
  * The base implementation exposes a single Drawable as well as a content
  * description.
  * 
  * @author Cyril Mottier
  */
-public abstract class ActionBarItem {
+public abstract class GDActionBarItem {
 
     public enum Type {
         GoHome, // A house
@@ -56,11 +56,11 @@ public abstract class ActionBarItem {
     protected View mItemView;
 
     protected Context mContext;
-    protected ActionBar mActionBar;
+    protected GDActionBar mActionBar;
 
     private int mItemId;
 
-    void setActionBar(ActionBar actionBar) {
+    void setActionBar(GDActionBar actionBar) {
         mContext = actionBar.getContext();
         mActionBar = actionBar;
     }
@@ -69,11 +69,11 @@ public abstract class ActionBarItem {
         return mDrawable;
     }
 
-    public ActionBarItem setDrawable(int drawableId) {
+    public GDActionBarItem setDrawable(int drawableId) {
         return setDrawable(mContext.getResources().getDrawable(drawableId));
     }
 
-    public ActionBarItem setDrawable(Drawable drawable) {
+    public GDActionBarItem setDrawable(Drawable drawable) {
         if (drawable != mDrawable) {
             mDrawable = drawable;
             if (mItemView != null) {
@@ -87,11 +87,11 @@ public abstract class ActionBarItem {
         return mContentDescription;
     }
 
-    public ActionBarItem setContentDescription(int contentDescriptionId) {
+    public GDActionBarItem setContentDescription(int contentDescriptionId) {
         return setContentDescription(mContext.getString(contentDescriptionId));
     }
 
-    public ActionBarItem setContentDescription(CharSequence contentDescription) {
+    public GDActionBarItem setContentDescription(CharSequence contentDescription) {
         if (contentDescription != mContentDescription) {
             mContentDescription = contentDescription;
             if (mItemView != null) {
@@ -131,7 +131,7 @@ public abstract class ActionBarItem {
         return mItemId;
     }
 
-    static ActionBarItem createWithType(ActionBar actionBar, ActionBarItem.Type type) {
+    static GDActionBarItem createWithType(GDActionBar actionBar, GDActionBarItem.Type type) {
 
         int drawableId;
         int descriptionId;
