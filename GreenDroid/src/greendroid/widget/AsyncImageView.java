@@ -44,7 +44,7 @@ public class AsyncImageView extends ImageView implements ImageRequestCallback {
     private static final String LOG_TAG = AsyncImageView.class.getSimpleName();
 
     /**
-     * Clients may listen to {@link AsyncImageView}Êchanges using a
+     * Clients may listen to {@link AsyncImageView} changes using a
      * {@link OnImageViewLoadListener}.
      * 
      * @author Cyril Mottier
