@@ -184,6 +184,10 @@ public class GDActionBar extends LinearLayout {
     }
 
     public GDActionBarItem addItem(GDActionBarItem item, int itemId) {
+    	return addItem(item, itemId, true);
+    }
+    
+    public GDActionBarItem addItem(GDActionBarItem item, int itemId, boolean showDivider) {
 
         if (mItems.size() >= MAX_ITEMS_COUNT) {
             /*
@@ -197,7 +201,7 @@ public class GDActionBar extends LinearLayout {
 
             item.setItemId(itemId);
 
-            if (mDividerDrawable != null) {
+            if (mDividerDrawable != null && showDivider) {
                 ImageView divider = new ImageView(getContext());
                 int dividerWidth = (mDividerWidth > 0) ? mDividerWidth : mDividerDrawable.getIntrinsicWidth();
                 final LinearLayout.LayoutParams lp = new LayoutParams(dividerWidth, LayoutParams.FILL_PARENT);

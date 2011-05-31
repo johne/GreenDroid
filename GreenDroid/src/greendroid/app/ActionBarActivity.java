@@ -37,7 +37,7 @@ public interface ActionBarActivity {
      */
     static final String GD_ACTION_BAR_TITLE = "greendroid.app.ActionBarActivity.GD_ACTION_BAR_TITLE";
 
-    /**
+    /** 
      * An integer that can be used to force GDActionBarionBar to a particular
      * visibility. This is especially useful when using GDActivity inside a
      * GDTabActivity.

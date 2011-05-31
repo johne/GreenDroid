@@ -233,6 +233,10 @@ public class GDActivity extends Activity implements ActionBarActivity {
         return getGDActionBar().addItem(item, itemId);
     }
 
+    public GDActionBarItem addActionBarItem(GDActionBarItem item, int itemId, boolean showDivider) {
+        return getGDActionBar().addItem(item, itemId, showDivider);
+    }
+
     public GDActionBarItem addActionBarItem(GDActionBarItem.Type actionBarItemType) {
         return getGDActionBar().addItem(actionBarItemType);
     }
